@@ -1,0 +1,19 @@
+{
+  "name": "styleshop",
+  "version": "1.0.0",
+  "description": "StyleShop - Loja de Roupas (DW1 - 4º bimestre 2026)",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "testar-email": "node backend/testarEmail.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "nodemailer": "^6.9.16",
+    "pg": "^8.16.3",
+    "sharp": "^0.33.3"
+  }
+}

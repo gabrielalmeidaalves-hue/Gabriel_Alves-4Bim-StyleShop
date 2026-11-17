@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD - Pedido</title>
+    <link rel="stylesheet" href="./pesquisaDinamicaStyle.css">
+    <link rel="stylesheet" href="./pedido.css">
+    <link rel="stylesheet" href="/css/admin-bar.css">
+</head>
+
+<body>
+    <header>
+        <h1>CRUD Pedido</h1>
+        
+        <nav class="admin-nav" aria-label="Navegação administrativa">
+            <a href="/menu">Loja</a>
+            <a href="/menu/admin">Painel administrativo</a>
+            <a href="/pedido/abrirCrudPedido">Pedidos</a>
+            <a href="/produto/abrirCrudProduto">Produtos</a>
+            <a href="/categoria_roupa/abrirCrudCategoriaRoupa">Categorias</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <form id="pedidoForm">
+                <div class="search-container">
+                    <label for="searchId">Buscar por ID:</label>
+                    <div class="search-input-group">
+                        <input type="number" id="searchId" min="1" onkeydown="bloquearTeclas(event, true)" placeholder="Digite o ID para buscar">
+                        <button type="button" id="btnBuscar">🔍 Buscar</button>
+                        <button type="button" id="btnIncluir" class="btn-primary">Incluir</button>
+                        <button type="button" id="btnAlterar" class="btn-secondary" style="display: none;">Alterar</button>
+                        <button type="button" id="btnExcluir" class="btn-danger" style="display: none;">Excluir</button>
+                        <button type="button" id="btnSalvar" class="btn-save" style="display: none;">Salvar</button>
+                        <button type="button" id="btnCancelar" class="btn-cancel">Cancelar</button>
+                    </div>
+                </div>
+
+                <fieldset id="formFields">
+                    <legend>Dados do Pedido</legend>
+                    <div class="pedido-campos">
+                        <div class="campo-pedido">
+                            <label for="data_pedido">Data do pedido</label>
+                            <input type="date" id="data_pedido" name="data_pedido" required>
+                        </div>
+
+                        <div class="campo-pedido">
+                            <label for="cliente_pessoa_cpf_pessoa">Cliente (digite o nome ou o CPF)</label>
+                            <div class="linha-cpf-nome">
+                                <div class="search-bar-container">
+                                    <input type="text" id="cliente_pessoa_cpf_pessoa" name="cliente_pessoa_cpf_pessoa"
+                                        placeholder="Nome ou CPF..." onfocus="buscaDinamica()">
+                                    <ul id="resultsList" class="results-list"></ul>
+                                </div>
+                                <input type="text" id="nomeCliente" class="nome-readonly" readonly tabindex="-1" placeholder="Nome do cliente">
+                            </div>
+                        </div>
+
+                        <div class="campo-pedido">
+                            <label for="funcionario_pessoa_cpf_pessoa">Vendedor / funcionário (CPF)</label>
+                            <div class="linha-cpf-nome">
+                                <input type="text" id="funcionario_pessoa_cpf_pessoa" name="funcionario_pessoa_cpf_pessoa"
+                                    placeholder="CPF do funcionário..." maxlength="11" required>
+                                <input type="text" id="nomeFuncionario" class="nome-readonly" readonly tabindex="-1" placeholder="Nome do vendedor">
+                            </div>
+                            <small class="dica-campo">Pedidos feitos pelo site usam o funcionário “online” (00000000000).</small>
+                        </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <div class="bloco-itens">
+                <div class="bloco-itens-topo">
+                    <h3>Itens do Pedido</h3>
+                    <button type="button" id="btnAdicionarItem" onclick="adicionarItem()" class="btn-secondary btn-small">+ Adicionar Item</button>
+                </div>
+                <p class="dica-campo">Para adicionar itens, primeiro busque (ou inclua) um pedido.</p>
+                <div class="item-table-container">
+                    <table id="itensTable" class="tabela-pedidos">
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>ID Produto</th>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço Unitário</th>
+                                <th>Subtotal</th>
+                                <th>Salvar</th>
+                                <th>Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody id="itensTableBody">
+                            <!-- Itens serão carregados dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="lista-pedidos">
+            <h3>Pedidos cadastrados</h3>
+            <div class="item-table-container">
+                <table class="tabela-pedidos">
+                    <thead>
+                        <tr><th>ID</th><th>Data</th><th>Cliente</th><th>Vendedor</th></tr>
+                    </thead>
+                    <tbody id="pedidosTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 StyleShop &mdash; Gabriel de Almeida Alves | Turma M32 | 2026</p>
+    </footer>
+
+    <div id="messageContainer" class="message-container"></div>
+    <script src="./pesquisaDinamicaCliente.js"></script>
+    <script src="./pedido.js" defer></script>
+
+</body>
+
+</html>

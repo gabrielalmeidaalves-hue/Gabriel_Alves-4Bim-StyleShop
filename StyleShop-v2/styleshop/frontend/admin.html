@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel administrativo | StyleShop</title>
+    <link rel="stylesheet" href="/css/loja.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="topo">
+            <a class="logo" href="/menu">Style<span>Shop</span></a>
+            <div class="usuario-area" id="usuarioArea" aria-live="polite"></div>
+        </div>
+        <nav class="nav" aria-label="Navegação principal">
+            <ul>
+                <li><a href="/menu">Loja</a></li>
+                <li><a href="/login/visaoclientecarrinho">&#128722; Carrinho (<span id="contadorCarrinho">0</span>)</a></li>
+                <li data-logado hidden><a href="/pedido/abrirMeusPedidos">Meus pedidos</a></li>
+                <li data-admin hidden>
+                    <a href="/menu/admin">Administração &#9662;</a>
+                    <ul class="submenu">
+                        <li><a href="/menu/admin">Painel administrativo</a></li>
+                        <li><a href="/produto/abrirCrudProduto">Produtos</a></li>
+                        <li><a href="/categoria_roupa/abrirCrudCategoriaRoupa">Categorias</a></li>
+                        <li><a href="/pedido/abrirCrudPedido">Pedidos</a></li>
+                        <li><a href="/pessoa/abrirCrudPessoa">Pessoas</a></li>
+                        <li><a href="/cargo/abrirCrudCargo">Cargos</a></li>
+                        <li><a href="/forma_pagamento/abrirCrudForma_pagamento">Formas de pagamento</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Painel administrativo</h2>
+        <p class="card-detalhe">Área exclusiva da administração (Gerente, Supervisor e Diretor). Clientes e os demais funcionários não têm acesso a estas telas.</p>
+
+        <section aria-label="Resumo" class="cards-admin" style="margin:18px 0">
+            <div class="card-admin"><span>Produtos</span><div class="estat" id="nProdutos">-</div></div>
+            <div class="card-admin"><span>Pedidos</span><div class="estat" id="nPedidos">-</div></div>
+            <div class="card-admin"><span>Pagamentos</span><div class="estat" id="nPagamentos">-</div></div>
+            <div class="card-admin"><span>Pessoas cadastradas</span><div class="estat" id="nPessoas">-</div></div>
+        </section>
+
+        <section aria-label="Cadastros" class="cards-admin">
+            <a class="card-admin" href="/produto/abrirCrudProduto"><strong>Produtos</strong><span>Cadastro de roupas, estoque, preço e imagem</span></a>
+            <a class="card-admin" href="/categoria_roupa/abrirCrudCategoriaRoupa"><strong>Categorias</strong><span>Feminino, masculino, infantil...</span></a>
+            <a class="card-admin" href="/pedido/abrirCrudPedido"><strong>Pedidos</strong><span>Pedidos e itens dos pedidos</span></a>
+            <a class="card-admin" href="/pessoa/abrirCrudPessoa"><strong>Pessoas</strong><span>Clientes e funcionários</span></a>
+            <a class="card-admin" href="/cargo/abrirCrudCargo"><strong>Cargos</strong><span>Cargos dos funcionários</span></a>
+            <a class="card-admin" href="/forma_pagamento/abrirCrudForma_pagamento"><strong>Formas de pagamento</strong><span>Pix, cartão, boleto...</span></a>
+        </section>
+    </main>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 StyleShop &mdash; Gabriel de Almeida Alves | Turma M32 | 2026</p>
+    </footer>
+
+    <script src="/js/nav.js"></script>
+    <script>
+        // Estatísticas rápidas (as rotas abaixo só respondem para administradores)
+        const contar = async (url, id) => {
+            try { const r = await fetch(url); const d = await r.json(); document.getElementById(id).textContent = Array.isArray(d) ? d.length : '-'; }
+            catch (e) { document.getElementById(id).textContent = '-'; }
+        };
+        contar('/produto', 'nProdutos'); contar('/pedido', 'nPedidos'); contar('/pessoa', 'nPessoas'); contar('/pagamento', 'nPagamentos');
+    </script>
+</body>
+</html>

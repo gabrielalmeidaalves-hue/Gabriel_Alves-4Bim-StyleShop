@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Roupas | StyleShop</title>
+    <link rel="stylesheet" href="/css/loja.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="topo">
+            <a class="logo" href="/menu">Style<span>Shop</span></a>
+            <div class="usuario-area" id="usuarioArea" aria-live="polite"></div>
+        </div>
+        <nav class="nav" aria-label="Navegação principal">
+            <ul>
+                <li><a href="/menu">Loja</a></li>
+                <li><a href="/login/visaoclientecarrinho">&#128722; Carrinho (<span id="contadorCarrinho">0</span>)</a></li>
+                <li data-logado hidden><a href="/pedido/abrirMeusPedidos">Meus pedidos</a></li>
+                <li data-admin hidden>
+                    <a href="/menu/admin">Administração &#9662;</a>
+                    <ul class="submenu">
+                        <li><a href="/menu/admin">Painel administrativo</a></li>
+                        <li><a href="/produto/abrirCrudProduto">Produtos</a></li>
+                        <li><a href="/categoria_roupa/abrirCrudCategoriaRoupa">Categorias</a></li>
+                        <li><a href="/pedido/abrirCrudPedido">Pedidos</a></li>
+                        <li><a href="/pessoa/abrirCrudPessoa">Pessoas</a></li>
+                        <li><a href="/cargo/abrirCrudCargo">Cargos</a></li>
+                        <li><a href="/forma_pagamento/abrirCrudForma_pagamento">Formas de pagamento</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="layout-loja">
+            <aside class="filtros" aria-label="Filtros de produtos">
+                <h2>Filtrar</h2>
+                <label for="busca">Buscar</label>
+                <input type="text" id="busca" placeholder="Ex.: vestido, jeans...">
+                <label for="fCategoria">Categoria</label>
+                <select id="fCategoria"><option value="">Todas</option></select>
+                <label for="fTamanho">Tamanho</label>
+                <select id="fTamanho"><option value="">Todos</option></select>
+                <label for="fCor">Cor</label>
+                <select id="fCor"><option value="">Todas</option></select>
+                <label for="fOrdem">Ordenar por</label>
+                <select id="fOrdem">
+                    <option value="id">Padrão</option>
+                    <option value="menor">Menor preço</option>
+                    <option value="maior">Maior preço</option>
+                    <option value="nome">Nome (A-Z)</option>
+                </select>
+                <label class="check"><input type="checkbox" id="fEstoque"> Somente em estoque</label>
+                <button type="button" class="btn btn-sec btn-bloco" id="btnLimpar">Limpar filtros</button>
+            </aside>
+
+            <section aria-labelledby="tituloVitrine">
+                <h2 id="tituloVitrine">Nossos produtos <small id="qtdResultados" class="card-detalhe"></small></h2>
+                <div id="grade" class="grade"><div class="mensagem-info">Carregando produtos...</div></div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 StyleShop &mdash; Gabriel de Almeida Alves | Turma M32 | 2026</p>
+    </footer>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>

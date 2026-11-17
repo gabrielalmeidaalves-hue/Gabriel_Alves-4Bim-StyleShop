@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | StyleShop</title>
+    <link rel="stylesheet" href="/css/loja.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="topo">
+            <a class="logo" href="/menu">Style<span>Shop</span></a>
+            <div class="usuario-area" id="usuarioArea" aria-live="polite"></div>
+        </div>
+        <nav class="nav" aria-label="Navegação principal">
+            <ul>
+                <li><a href="/menu">Loja</a></li>
+                <li><a href="/login/visaoclientecarrinho">&#128722; Carrinho (<span id="contadorCarrinho">0</span>)</a></li>
+                <li data-logado hidden><a href="/pedido/abrirMeusPedidos">Meus pedidos</a></li>
+                <li data-admin hidden>
+                    <a href="/menu/admin">Administração &#9662;</a>
+                    <ul class="submenu">
+                        <li><a href="/menu/admin">Painel administrativo</a></li>
+                        <li><a href="/produto/abrirCrudProduto">Produtos</a></li>
+                        <li><a href="/categoria_roupa/abrirCrudCategoriaRoupa">Categorias</a></li>
+                        <li><a href="/pedido/abrirCrudPedido">Pedidos</a></li>
+                        <li><a href="/pessoa/abrirCrudPessoa">Pessoas</a></li>
+                        <li><a href="/cargo/abrirCrudCargo">Cargos</a></li>
+                        <li><a href="/forma_pagamento/abrirCrudForma_pagamento">Formas de pagamento</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="painel caixa-login" aria-labelledby="tLogin">
+            <h2 id="tLogin">Acesse sua conta</h2>
+            <div class="abas" role="tablist">
+                <button type="button" id="abaEntrar" class="ativa" role="tab">Entrar</button>
+                <button type="button" id="abaCadastro" role="tab">Criar conta</button>
+            </div>
+            <div id="mensagem"></div>
+
+            <form id="formLogin" autocomplete="on">
+                <div class="campo" style="margin-bottom:12px"><label for="email">E-mail</label><input type="email" id="email" required autocomplete="username"></div>
+                <div class="campo" style="margin-bottom:16px"><label for="senha">Senha</label><input type="password" id="senha" required autocomplete="current-password"></div>
+                <button type="submit" class="btn btn-bloco">Entrar</button>
+                <p class="dica" style="text-align:center"><a href="#" id="linkEsqueci">Esqueci minha senha</a></p>
+                <p class="dica">Funcionários e administradores entram por aqui também e têm acesso às telas de cadastro.</p>
+            </form>
+
+            <form id="formEsqueci" hidden>
+                <h3 style="margin-top:0">Recuperar senha</h3>
+                <p class="dica" style="margin-top:0">Informe o e-mail da sua conta. Enviaremos um código de 6 números para você criar uma nova senha.</p>
+                <div class="campo" style="margin-bottom:16px"><label for="eEmail">E-mail</label><input type="email" id="eEmail" required autocomplete="email"></div>
+                <button type="submit" class="btn btn-bloco" id="btnEnviarLink">Enviar código</button>
+                <p class="dica" style="text-align:center"><a href="#" id="linkVoltarLogin">Voltar para o login</a></p>
+            </form>
+
+            <form id="formCodigo" hidden>
+                <h3 style="margin-top:0">Digite o código e a nova senha</h3>
+                <p class="dica" style="margin-top:0">Veja o código de 6 números no seu e-mail (olhe também o spam). Ele vale por 10 minutos.</p>
+                <div class="campo" style="margin-bottom:12px"><label for="rCodigo">Código</label><input type="number" id="rCodigo" required min="0" onkeydown="bloquearTeclas(event, true)" oninput="limitarTamanho(this, 6)" placeholder="6 números"></div>
+                <div class="campo" style="margin-bottom:12px"><label for="rSenha">Nova senha (mínimo 6 caracteres)</label><input type="password" id="rSenha" required minlength="6" maxlength="50" autocomplete="new-password"></div>
+                <div class="campo" style="margin-bottom:16px"><label for="rSenha2">Confirmar nova senha</label><input type="password" id="rSenha2" required minlength="6" maxlength="50" autocomplete="new-password"></div>
+                <button type="submit" class="btn btn-bloco" id="btnRedefinir">Redefinir senha</button>
+                <p class="dica" style="text-align:center"><a href="#" id="linkNovoCodigo">Não recebi o código (enviar de novo)</a></p>
+            </form>
+
+            <form id="formCadastro" hidden>
+                <div class="form-grid">
+                    <div class="campo cheio"><label for="cNome">Nome completo</label><input type="text" id="cNome" required maxlength="60" minlength="3"></div>
+                    <div class="campo"><label for="cCpf">CPF (somente números)</label><input type="number" id="cCpf" required min="0" onkeydown="bloquearTeclas(event, true)" oninput="limitarTamanho(this, 11)" placeholder="11 números"></div>
+                    <div class="campo"><label for="cNasc">Data de nascimento</label><input type="date" id="cNasc" required></div>
+                    <div class="campo cheio"><label for="cEnd">Endereço</label><input type="text" id="cEnd" required maxlength="150"></div>
+                    <div class="campo"><label for="cEmail">E-mail</label><input type="email" id="cEmail" required maxlength="75"></div>
+                    <div class="campo"><label for="cSenha">Senha</label><input type="password" id="cSenha" required maxlength="50"></div>
+                </div>
+                <button type="submit" class="btn btn-bloco" style="margin-top:16px">Criar conta e entrar</button>
+                <p class="dica">Já é funcionário da loja? Informe o seu CPF e o seu e-mail de sempre e a sua <strong>senha atual</strong>: o perfil de cliente é adicionado à mesma conta.</p>
+            </form>
+        </section>
+    </main>
+
+
+    <footer>
+        <p>&copy; 2026 StyleShop &mdash; Gabriel de Almeida Alves | Turma M32 | 2026</p>
+    </footer>
+
+    <script src="/js/nav.js"></script>
+    <script src="/login/login.js"></script>
+</body>
+</html>

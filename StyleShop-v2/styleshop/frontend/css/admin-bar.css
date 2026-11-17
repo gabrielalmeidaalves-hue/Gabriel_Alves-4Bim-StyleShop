@@ -1,0 +1,4 @@
+.admin-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+.admin-nav a{color:#fff;text-decoration:none;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:6px;font-size:.9rem}
+.admin-nav a:hover{background:rgba(255,255,255,.35)}
+footer{text-align:center;padding:16px;margin-top:24px}
