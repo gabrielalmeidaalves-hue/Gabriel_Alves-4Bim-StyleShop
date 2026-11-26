@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar compra | StyleShop</title>
+    <link rel="stylesheet" href="/css/loja.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="topo">
+            <a class="logo" href="/menu">Style<span>Shop</span></a>
+            <div class="usuario-area" id="usuarioArea" aria-live="polite"></div>
+        </div>
+        <nav class="nav" aria-label="Navegação principal">
+            <ul>
+                <li><a href="/menu">Loja</a></li>
+                <li><a href="/login/visaoclientecarrinho">&#128722; Carrinho (<span id="contadorCarrinho">0</span>)</a></li>
+                <li data-logado hidden><a href="/pedido/abrirMeusPedidos">Meus pedidos</a></li>
+                <li data-admin hidden>
+                    <a href="/menu/admin">Administração &#9662;</a>
+                    <ul class="submenu">
+                        <li><a href="/menu/admin">Painel administrativo</a></li>
+                        <li><a href="/produto/abrirCrudProduto">Produtos</a></li>
+                        <li><a href="/categoria_roupa/abrirCrudCategoriaRoupa">Categorias</a></li>
+                        <li><a href="/pedido/abrirCrudPedido">Pedidos</a></li>
+                        <li><a href="/pessoa/abrirCrudPessoa">Pessoas</a></li>
+                        <li><a href="/cargo/abrirCrudCargo">Cargos</a></li>
+                        <li><a href="/forma_pagamento/abrirCrudForma_pagamento">Formas de pagamento</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="painel" aria-labelledby="tFin">
+            <h2 id="tFin">Revise seu pedido</h2>
+            <p id="dadosCliente" class="card-detalhe"></p>
+            <div class="rolagem">
+                <table class="tabela">
+                    <thead><tr><th>Produto</th><th>Tam. / Cor</th><th>Preço</th><th>Qtd.</th><th>Subtotal</th></tr></thead>
+                    <tbody id="listaFinalizar"></tbody>
+                </table>
+            </div>
+
+            <div class="campo" style="max-width:420px">
+                <label for="cep">CEP de entrega</label>
+                <div style="display:flex;gap:8px">
+                    <input type="text" id="cep" maxlength="8" inputmode="numeric" placeholder="Somente números" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <button type="button" class="btn btn-sec" id="btnCalcularFrete">Calcular frete</button>
+                </div>
+                <p class="dica" id="infoFrete">Informe o CEP para calcular o frete. Entregamos em até 100 km da loja.</p>
+            </div>
+
+            <p class="card-detalhe" style="text-align:right;margin-bottom:0" id="linhaProdutos">Produtos: R$ 0,00</p>
+            <p class="card-detalhe" style="text-align:right;margin:4px 0" id="linhaFrete">Frete: calcule o CEP</p>
+            <p class="total" id="totalFinal">Total: R$ 0,00</p>
+            <div id="mensagem"></div>
+            <div class="acoes">
+                <a class="btn btn-sec" href="/login/visaoclientecarrinho">Voltar ao carrinho</a>
+                <button type="button" class="btn" id="btnConfirmar">Ir para o pagamento</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 StyleShop &mdash; Gabriel de Almeida Alves | Turma M32 | 2026</p>
+    </footer>
+
+    <script src="/js/nav.js"></script>
+    <script src="/visaoCliente/finalizar/finalizar.js"></script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+/* ==========================================================================
+   StyleShop - tema das telas administrativas (cadastros / CRUDs)
+   Este arquivo é carregado por ÚLTIMO em cada tela de cadastro, então ele
+   sobrepõe as cores verdes antigas de cada página (cargo.css, pessoa.css...).
+   Mesma identidade da loja: vinho + dourado sobre creme, títulos em serifa.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --tinta: #1a1520;
+    --tinta-2: #2b2233;
+    --vinho: #9b2c57;
+    --vinho-esc: #7a2145;
+    --vinho-claro: #f8e8ef;
+    --dourado: #c9a24b;
+    --dourado-claro: #f5ebcf;
+    --creme: #f7f2ec;
+    --areia: #efe6da;
+    --texto: #2a2330;
+    --suave: #6e6577;
+    --borda: #e8dfd3;
+    --ok: #2f7d5a;
+    --ok-claro: #e3f3ea;
+    --erro: #b3261e;
+    --erro-claro: #fbe9e7;
+    --aviso: #8a5a00;
+    --aviso-claro: #fdf1d6;
+    --sombra: 0 10px 30px rgba(26, 21, 32, 0.08);
+    --sombra-forte: 0 20px 44px rgba(26, 21, 32, 0.18);
+    --serifa: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --sans: 'Poppins', 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+
+    /* a tela de categorias usa estas variáveis próprias: apontamos para a nova paleta */
+    --cor-primaria: var(--tinta);
+    --cor-secundaria: var(--vinho);
+    --cor-secundaria-hover: var(--vinho-esc);
+    --cor-fundo: var(--creme);
+    --cor-texto: var(--texto);
+    --cor-aviso: var(--erro);
+    --cor-borda: var(--borda);
+    --cor-branco: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+::selection { background: var(--vinho); color: #fff; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cdbfae; border-radius: 99px; border: 2px solid var(--creme); }
+::-webkit-scrollbar-thumb:hover { background: var(--vinho); }
+
+/* ===== base da página ===== */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--texto);
+    background:
+        radial-gradient(1100px 480px at 100% -8%, rgba(155, 44, 87, 0.10), transparent 60%),
+        radial-gradient(900px 420px at -8% 12%, rgba(201, 162, 75, 0.14), transparent 58%),
+        var(--creme);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+}
+body > main { width: 100%; flex: 1; animation: subir 0.5s ease both; }
+
+/* ===== cabeçalho ===== */
+body header {
+    position: relative;
+    padding: 2.2rem 1rem 1.7rem;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(135deg, var(--tinta) 0%, var(--tinta-2) 100%);
+    box-shadow: 0 8px 24px rgba(26, 21, 32, 0.25);
+}
+body header::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--dourado) 20%, var(--vinho) 55%, var(--dourado) 85%, transparent);
+}
+body header h1 {
+    margin: 0 0 0.3rem;
+    font-family: var(--serifa);
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-shadow: none;
+}
+body header p { margin: 0 0 0.4rem; font-size: 0.95rem; opacity: 0.8; }
+
+/* menu de atalhos do cabeçalho */
+.admin-nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+.admin-nav a {
+    padding: 8px 18px;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    transition: all 0.25s ease;
+}
+.admin-nav a:hover { color: var(--tinta); background: var(--dourado); border-color: var(--dourado); transform: translateY(-2px); }
+
+/* ===== cartões e títulos ===== */
+body section {
+    background: #fff;
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    box-shadow: var(--sombra);
+}
+body section h2 {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.7rem;
+    font-family: var(--serifa);
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--tinta);
+    border-bottom: 0;
+}
+body section h2::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 58px; height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--dourado), var(--vinho));
+}
+body h3 { font-family: var(--serifa); font-weight: 600; color: var(--tinta); }
+
+/* ===== busca por ID e grupos de campos ===== */
+body .search-container {
+    padding: 1.5rem;
+    background: linear-gradient(180deg, #fffdfb, #faf5ee);
+    border: 1.5px dashed #d8c9b4;
+    border-radius: 16px;
+}
+body .search-container label,
+body .form-group label,
+body .campo-pedido label,
+body .form-esquerda label {
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--suave);
+}
+body fieldset {
+    background: #fffdfb;
+    border: 1.5px solid var(--borda);
+    border-radius: 16px;
+}
+body fieldset legend {
+    padding: 0 0.7rem;
+    font-family: var(--serifa);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--vinho);
+}
+
+/* ===== campos ===== */
+body input[type="text"],
+body input[type="number"],
+body input[type="date"],
+body input[type="password"],
+body input[type="email"],
+body select,
+body textarea,
+body .form-group input,
+body .form-group select,
+body .search-input-group input {
+    font-family: var(--sans);
+    font-size: 0.93rem;
+    color: var(--texto);
+    background-color: #fff;
+    border-color: var(--borda) !important;
+    border-radius: 12px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+body input:focus,
+body select:focus,
+body textarea:focus {
+    outline: none;
+    border-color: var(--vinho) !important;
+    box-shadow: 0 0 0 4px rgba(155, 44, 87, 0.13) !important;
+    background-color: #fffdfd;
+}
+body input[readonly] { background-color: var(--areia); color: var(--vinho); font-weight: 600; }
+body input[type="checkbox"],
+body input[type="radio"] { accent-color: var(--vinho); }
+::placeholder { color: #b3a9bb; }
+
+/* ===== botões ===== */
+body button,
+body input[type="button"] {
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+body button:hover,
+body input[type="button"]:hover { transform: translateY(-2px); filter: brightness(1.07); }
+body button:active,
+body input[type="button"]:active { transform: translateY(0); }
+body button:disabled,
+body input[type="button"]:disabled { opacity: 0.5; cursor: not-allowed; transform: none; filter: none; }
+
+/* Incluir */
+body .btn-primary,
+body #btInserir,
+body #btProcure {
+    color: #fff;
+    background: linear-gradient(135deg, var(--vinho) 0%, #c04373 100%);
+    box-shadow: 0 8px 18px rgba(155, 44, 87, 0.28);
+}
+/* Alterar */
+body .btn-secondary,
+body #btAlterar {
+    color: #fff;
+    background: linear-gradient(135deg, var(--tinta) 0%, var(--tinta-2) 100%);
+    box-shadow: 0 8px 18px rgba(26, 21, 32, 0.25);
+}
+/* Salvar */
+body .btn-save,
+body #btSalvar {
+    color: #fff;
+    background: linear-gradient(135deg, #2f7d5a 0%, #3f9b72 100%);
+    box-shadow: 0 8px 18px rgba(47, 125, 90, 0.28);
+}
+/* Excluir */
+body .btn-danger,
+body #btExcluir {
+    color: #fff;
+    background: linear-gradient(135deg, #b3261e 0%, #d4473e 100%);
+    box-shadow: 0 8px 18px rgba(179, 38, 30, 0.28);
+}
+/* Cancelar */
+body .btn-cancel,
+body #btCancelar {
+    color: var(--suave);
+    background: transparent;
+    border: 1.5px solid var(--borda);
+    box-shadow: none;
+}
+body .btn-cancel:hover,
+body #btCancelar:hover { color: var(--tinta); background: var(--areia); }
+/* Buscar (botão sem classe, ao lado do campo de ID) e buscar produto do item */
+body .search-input-group button:not([class]),
+body .btn-id {
+    color: var(--tinta);
+    background: linear-gradient(135deg, #dcb961 0%, var(--dourado) 100%);
+    box-shadow: 0 8px 18px rgba(201, 162, 75, 0.30);
+}
+body .btn-small { padding: 0.55rem 1.2rem; font-size: 0.8rem; }
+
+/* ===== tabelas ===== */
+body .table-container,
+body .item-table-container {
+    background: #fff;
+    border: 1.5px solid var(--borda);
+    border-radius: 16px;
+}
+/* o degradê fica no cabeçalho inteiro; as células ficam transparentes para não "listrar" */
+body table thead { background: linear-gradient(135deg, var(--tinta), var(--tinta-2)); color: #fff; }
+body table thead th,
+body .tabela-pedidos thead th { background: transparent; color: #fff; }
+body table th,
+body .tabela-pedidos th {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+body table th,
+body table td,
+body .tabela-pedidos th,
+body .tabela-pedidos td { border-bottom: 1px solid #f0e9df; }
+body table tbody tr:nth-child(even) { background-color: #fcfaf6; }
+body table tbody tr:hover,
+body table tbody tr:nth-child(even):hover { background-color: #fbf1f5; }
+body table img { border-radius: 10px; background: var(--areia); }
+
+/* ===== mensagens flutuantes ===== */
+body .message {
+    border-radius: 14px;
+    border: 0;
+    border-left: 6px solid;
+    font-weight: 500;
+    box-shadow: var(--sombra-forte);
+}
+body .message.success { background: var(--ok-claro); color: var(--ok); border-left-color: var(--ok); }
+body .message.error { background: var(--erro-claro); color: var(--erro); border-left-color: var(--erro); }
+body .message.warning { background: var(--aviso-claro); color: var(--aviso); border-left-color: var(--dourado); }
+body .message.info { background: #ece9f8; color: #3f3a8f; border-left-color: #6c63d9; }
+
+/* ===== detalhes de cada tela ===== */
+/* pessoa: caixas de funcionário e cliente */
+body .funcionario { background: var(--dourado-claro); border: 1px solid #e3d29b; color: #5a4310; }
+body .cliente { background: var(--vinho-claro); border: 1px solid #ecc6d5; color: var(--vinho-esc); }
+body .umParaum { font-family: var(--sans); }
+
+/* produto: imagem e reposição de estoque */
+body .img-container img { border-color: #d8c9b4; background-color: var(--areia); }
+body .img-container img:hover { border-color: var(--vinho); box-shadow: 0 10px 24px rgba(155, 44, 87, 0.22); }
+body .instrucao-imagem { color: var(--suave); }
+body .repor-estoque {
+    background: linear-gradient(180deg, #fffdfb, #faf5ee);
+    border: 1.5px dashed var(--dourado);
+    border-radius: 16px;
+}
+body .repor-estoque h3 { font-size: 1.2rem; }
+body .repor-estoque p { color: var(--suave); }
+body .repor-campos input { border: 1.5px solid var(--borda); }
+
+/* pedido: blocos, nomes e lista de busca de clientes */
+body .bloco-itens,
+body .lista-pedidos {
+    background: #fff;
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    box-shadow: var(--sombra);
+}
+body .nome-readonly { background: var(--areia); color: var(--vinho); font-weight: 600; }
+body .dica-campo { color: var(--suave); }
+body .results-list {
+    background: #fff;
+    border: 1.5px solid var(--borda);
+    border-radius: 12px;
+    box-shadow: var(--sombra-forte);
+    overflow: hidden;
+}
+body .results-list li:hover { background: var(--vinho-claro); color: var(--vinho-esc); }
+
+/* categorias */
+body .lista-categorias {
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    box-shadow: var(--sombra);
+}
+body .lista-categorias h3 { border-bottom-color: var(--dourado); }
+body #outputSaida { font-family: var(--sans); color: var(--texto); }
+body #divAviso { border-radius: 12px; }
+body #btProcure,
+body #btInserir,
+body #btAlterar,
+body #btExcluir,
+body #btSalvar,
+body #btCancelar { padding: 0.7rem 1.6rem; }
+
+/* ===== rodapé ===== */
+body footer {
+    margin-top: auto;
+    padding: 1.7rem 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: #cfc6d6;
+    background: linear-gradient(135deg, var(--tinta), var(--tinta-2));
+    border-top: 3px solid var(--dourado);
+}
+body footer p { margin: 0; }
+
+@keyframes subir {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 768px) {
+    body header h1 { font-size: 1.6rem; }
+    body section h2 { font-size: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+}
